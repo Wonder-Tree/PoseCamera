@@ -1,3 +1,5 @@
+> **_NOTE:_**  Repository is still in development, Please don't use for any production use.
+
 # PoseCamera
 PoseCamera is Socket based sdk for multi human pose estimation through rgb webcam. You can integrate this sdk into any programming language. 
 
