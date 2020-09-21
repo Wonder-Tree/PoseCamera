@@ -42,4 +42,4 @@ RUN curl -o ./PoseCamera/checkpoint_iter_50000.pth https://storage.googleapis.co
 
 # Run app
 WORKDIR ./PoseCamera
-CMD python pose-cli.py --checkpoint-path ./checkpoint_iter_50000.pth --images ./demo
+CMD python pose-cli.py --checkpoint-path ./checkpoint_iter_50000.pth --images ./demo/female_pose.jpg

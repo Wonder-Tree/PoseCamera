@@ -1,6 +1,7 @@
 > **_NOTE:_**  Repository is still in development, Please don't use for any production use.
 
 # PoseCamera
+[![PoseCamera Actions Status](https://github.com/Wonder-Tree/PoseCamera/workflows/ci/badge.svg)](https://github.com/Wonder-Tree/PoseCamera/actions)
 PoseCamera is Socket based sdk for multi human pose estimation through rgb webcam. You can integrate this sdk into any programming language. 
 
 The base of this repository is based on following research paper.

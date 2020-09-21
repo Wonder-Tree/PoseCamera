@@ -113,27 +113,28 @@ def run_demo(net, image_provider, height_size, cpu, track, smooth):
             pose = Pose(pose_keypoints, pose_entries[n][18])
             current_poses.append(pose)
 
-        if track:
-            track_poses(previous_poses, current_poses, smooth=smooth)
-            previous_poses = current_poses
-        for pose in current_poses:
-            pose.draw(img)
-        #img = cv2.addWeighted(orig_img, 0.6, img, 0.9, 0)
-        for pose in current_poses:
-            cv2.rectangle(img, (pose.bbox[0], pose.bbox[1]),
-                          (pose.bbox[0] + pose.bbox[2], pose.bbox[1] + pose.bbox[3]), (32, 202, 252))
+        if not no_display:
             if track:
-                cv2.putText(img, 'id: {}'.format(pose.id), (pose.bbox[0], pose.bbox[1] - 16),
-                            cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 255))
-        cv2.imshow('PoseCamera', img)
-        key = cv2.waitKey(delay)
-        if key == 27:  # esc
-            return
-        elif key == 112:  # 'p'
-            if delay == 33:
-                delay = 0
-            else:
-                delay = 100
+                track_poses(previous_poses, current_poses, smooth=smooth)
+                previous_poses = current_poses
+            for pose in current_poses:
+                pose.draw(img)
+            #img = cv2.addWeighted(orig_img, 0.6, img, 0.9, 0)
+            for pose in current_poses:
+                cv2.rectangle(img, (pose.bbox[0], pose.bbox[1]),
+                              (pose.bbox[0] + pose.bbox[2], pose.bbox[1] + pose.bbox[3]), (32, 202, 252))
+                if track:
+                    cv2.putText(img, 'id: {}'.format(pose.id), (pose.bbox[0], pose.bbox[1] - 16),
+                                cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 255))
+            cv2.imshow('PoseCamera', img)
+            key = cv2.waitKey(delay)
+            if key == 27:  # esc
+                return
+            elif key == 112:  # 'p'
+                if delay == 33:
+                    delay = 0
+                else:
+                    delay = 100
 
 
 if __name__ == '__main__':
@@ -145,6 +146,7 @@ if __name__ == '__main__':
     parser.add_argument('--cpu', action='store_true', help='run network inference on cpu')
     parser.add_argument('--track', type=int, default=0, help='track pose id in video')
     parser.add_argument('--smooth', type=int, default=1, help='smooth pose keypoints')
+    parser.add_argument('--no-display', action='store_true', help='hide gui')
     args = parser.parse_args()
 
     if args.video == '' and args.images == '':
@@ -160,4 +162,4 @@ if __name__ == '__main__':
     else:
         args.track = 0
 
-    run_demo(net, frame_provider, args.height_size, args.cpu, args.track, args.smooth)
+    run_demo(net, frame_provider, args.height_size, args.cpu, args.track, args.smooth, args.no_display)
