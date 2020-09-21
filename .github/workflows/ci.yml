@@ -31,4 +31,4 @@ jobs:
       run: wget https://storage.googleapis.com/wt_storage/checkpoint_iter_50000.pth
     - name: Build project
       run: |
-        python pose-cli.py --checkpoint-path ./checkpoint_iter_50000.pth --cpu --images ./demo
+        python pose-cli.py --checkpoint-path ./checkpoint_iter_50000.pth --cpu --images ./demo/female_pose.jpg
