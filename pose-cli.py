@@ -51,7 +51,7 @@ class VideoReader(object):
         return img
 
 
-def infer_fast(net, img, net_input_height_size, stride, upsample_ratio, cpu,
+def infer_fast(net, img, net_input_height_size, stride, upsample_ratio, cpu, no_display,
                pad_value=(0, 0, 0), img_mean=(128, 128, 128), img_scale=1/256):
     height, width, _ = img.shape
     scale = net_input_height_size / height
