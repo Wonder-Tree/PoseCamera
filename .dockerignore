@@ -1,0 +1,5 @@
+.git
+*build*
+data
+3rdparty
+.vs
