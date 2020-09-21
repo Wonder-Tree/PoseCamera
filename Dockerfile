@@ -31,6 +31,9 @@ RUN apt install -y software-properties-common || apt install -y software-propert
 # Clone PoseCamera repo
 COPY . /PoseCamera
 
+# Install cython
+RUN pip3 install cython
+
 # Install Dependencies
 RUN cd ./PoseCamera && pip3 install -r requirements.txt
 
