@@ -51,7 +51,7 @@ class VideoReader(object):
         return img
 
 
-def infer_fast(net, img, net_input_height_size, stride, upsample_ratio, cpu, no_display,
+def infer_fast(net, img, net_input_height_size, stride, upsample_ratio, cpu, 
                pad_value=(0, 0, 0), img_mean=(128, 128, 128), img_scale=1/256):
     height, width, _ = img.shape
     scale = net_input_height_size / height
@@ -78,7 +78,7 @@ def infer_fast(net, img, net_input_height_size, stride, upsample_ratio, cpu, no_
     return heatmaps, pafs, scale, pad
 
 
-def run_demo(net, image_provider, height_size, cpu, track, smooth):
+def run_demo(net, image_provider, height_size, cpu, track, smooth,no_display):
     net = net.eval()
     if not cpu:
         net = net.cuda()

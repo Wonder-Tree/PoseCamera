@@ -2,6 +2,7 @@
 
 # PoseCamera
 [![PoseCamera Actions Status](https://github.com/Wonder-Tree/PoseCamera/workflows/ci/badge.svg)](https://github.com/Wonder-Tree/PoseCamera/actions)
+<a href="https://storage.googleapis.com/wt_storage/checkpoint_iter_50000.pth" title="PreTrainedModels"><img src="https://img.shields.io/badge/trained%20model-Download-brightgreen"></a>
 
 PoseCamera is Socket based sdk for multi human pose estimation through rgb webcam. You can integrate this sdk into any programming language. 
 
