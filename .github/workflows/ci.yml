@@ -1,0 +1,32 @@
+# This workflows will download pre-trained model and run inference on demo images using cpu
+name: ci
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+
+    runs-on: ubuntu-18.04
+    
+    strategy:
+      matrix:
+        python-version: [3.6]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+    - name: Install system dependencies
+      run: sudo apt install libgflags-dev libopencv-dev wget
+    - name: Download pre-trained model
+      run: wget https://storage.googleapis.com/wt_storage/checkpoint_iter_50000.pth
+    - name: Build project
+      run: |
+        python pose-cli.py --checkpoint-path ./checkpoint_iter_50000.pth --cpu --images ./demo
