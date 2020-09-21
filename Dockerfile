@@ -32,7 +32,7 @@ RUN apt install -y software-properties-common || apt install -y software-propert
 COPY . /PoseCamera
 
 # Install cython
-RUN pip3 install cython
+RUN pip3 install cython numpy
 
 # Install Dependencies
 RUN cd ./PoseCamera && pip3 install -r requirements.txt
