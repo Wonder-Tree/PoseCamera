@@ -1,6 +1,5 @@
 torch>=0.4.1
 torchvision>=0.2.1
-pycocotools==2.0.0
 opencv-python
-numpy
+pycocotools==2.0.0
 matplotlib

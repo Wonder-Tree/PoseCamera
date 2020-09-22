@@ -88,6 +88,9 @@ def run_demo(net, image_provider, height_size, cpu, track, smooth,no_display):
     num_keypoints = Pose.num_kpts
     previous_poses = []
     delay = 100
+    if type(image_provider) is ImageReader:
+        delay = 0
+
     for img in image_provider:
         orig_img = img.copy()
         heatmaps, pafs, scale, pad = infer_fast(net, img, height_size, stride, upsample_ratio, cpu)
