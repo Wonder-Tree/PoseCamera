@@ -139,7 +139,7 @@ def run_demo(net, image_provider, height_size, cpu, track, smooth,no_display):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--checkpoint-path', type=str, required=True, help='path to the checkpoint')
+    parser.add_argument('--checkpoint-path', type=str, default='./checkpoint_iter_50000.pth', help='path to the checkpoint')
     parser.add_argument('--height-size', type=int, default=256, help='network input layer height size')
     parser.add_argument('--video', type=str, default='', help='path to video file or camera id')
     parser.add_argument('--images', nargs='+', default='', help='path to input image(s)')
