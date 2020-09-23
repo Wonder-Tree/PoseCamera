@@ -1,14 +1,14 @@
-> **_NOTE:_**  Repository is still in development, Please don't use for any production use.
+> **_NOTE:_**  Repository is still in development, please don't use for any production use.
 
 # PoseCamera
 [![PoseCamera Actions Status](https://github.com/Wonder-Tree/PoseCamera/workflows/build/badge.svg)](https://github.com/Wonder-Tree/PoseCamera/actions)
 <a href="https://storage.googleapis.com/wt_storage/checkpoint_iter_50000.pth" title="PreTrainedModels"><img src="https://img.shields.io/badge/trained%20model-Download-brightgreen"></a>
 
-PoseCamera is Socket based sdk for multi human pose estimation through rgb webcam. You can integrate this sdk into any programming language. 
+PoseCamera is Socket based SDK for multi human pose estimation through RGB webcam. You can integrate this SDK into any programming language. 
 
 ### Quick Start
-The official docker image is hosted on [Docker Hub](https://hub.docker.com/r/wondertree/posecamera). You must have installed [docker](https://docs.docker.com/get-docker/) on your system. You can also use ```pose-cli.py``` localy with installing all dependencies listed in ```requirements.txt```. 
-> Also note that your nvidia driver should be compatible with CUDA10.2.
+The official docker image is hosted on [Docker Hub](https://hub.docker.com/r/wondertree/posecamera). The very first step is to install the docker [docker](https://docs.docker.com/get-docker/) on your system. You can also use ```pose-cli.py``` locally with installing all dependencies listed in ```requirements.txt```. 
+> Also note that your Nvidia driver Needs to be compatible with CUDA10.2.
 
 Doing inference on live webcam feed.
 ```sh
@@ -20,7 +20,10 @@ To run inference on images use following command.
 ```sh
 docker run --name posecamera --rm -e DISPLAY=$DISPLAY  wondertree/posecamera --images ./demo/female_pose.jpg --cpu
 ```
-The base of this repository is based on following research paper.
+
+For more details read our [Wiki](https://github.com/Wonder-Tree/PoseCamera/wiki)
+
+The base of this repository is based on the following research paper.
 ```
 @inproceedings{osokin2018lightweight_openpose,
     author={Osokin, Daniil},
