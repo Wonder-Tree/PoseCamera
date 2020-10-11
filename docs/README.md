@@ -22,7 +22,7 @@ To run inference on images use following command.
 docker run --name posecamera --rm -e DISPLAY=$DISPLAY  wondertree/posecamera --images ./demo/female_pose.jpg --cpu
 ```
 
-For more details read our [Wiki](https://github.com/Wonder-Tree/PoseCamera/wiki)
+For more details read our [Docs](https://wonder-tree.github.io/PoseCamera)
 
 The base of this repository is based on the following research paper.
 ```
