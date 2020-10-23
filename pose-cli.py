@@ -88,16 +88,15 @@ def run_demo(net, image_provider, height_size, cpu, track, smooth,no_display):
     num_keypoints = Pose.num_kpts
     previous_poses = []
     delay = 100
-    if type(image_provider) is ImageReader:
+    if isinstance(image_provider, ImageReader):
         delay = 0
 
     for img in image_provider:
-        orig_img = img.copy()
         heatmaps, pafs, scale, pad = infer_fast(net, img, height_size, stride, upsample_ratio, cpu)
 
         total_keypoints_num = 0
         all_keypoints_by_type = []
-        for kpt_idx in range(num_keypoints):  # 19th for bg
+        for kpt_idx in range(num_keypoints): 
             total_keypoints_num += extract_keypoints(heatmaps[:, :, kpt_idx], all_keypoints_by_type, total_keypoints_num)
 
         pose_entries, all_keypoints = group_keypoints(all_keypoints_by_type, pafs, demo=True)
@@ -105,15 +104,15 @@ def run_demo(net, image_provider, height_size, cpu, track, smooth,no_display):
             all_keypoints[kpt_id, 0] = (all_keypoints[kpt_id, 0] * stride / upsample_ratio - pad[1]) / scale
             all_keypoints[kpt_id, 1] = (all_keypoints[kpt_id, 1] * stride / upsample_ratio - pad[0]) / scale
         current_poses = []
-        for n in range(len(pose_entries)):
-            if len(pose_entries[n]) == 0:
+        for n, pose_entry in enumerate(pose_entries):
+            if len(pose_entry) == 0:
                 continue
             pose_keypoints = np.ones((num_keypoints, 2), dtype=np.int32) * -1
             for kpt_id in range(num_keypoints):
-                if pose_entries[n][kpt_id] != -1.0:  # keypoint was found
-                    pose_keypoints[kpt_id, 0] = int(all_keypoints[int(pose_entries[n][kpt_id]), 0])
-                    pose_keypoints[kpt_id, 1] = int(all_keypoints[int(pose_entries[n][kpt_id]), 1])
-            pose = Pose(pose_keypoints, pose_entries[n][18])
+                if pose_entry[kpt_id] != -1.0:
+                    pose_keypoints[kpt_id, 0] = int(all_keypoints[int(pose_entry[kpt_id]), 0])
+                    pose_keypoints[kpt_id, 1] = int(all_keypoints[int(pose_entry[kpt_id]), 1])
+            pose = Pose(pose_keypoints, pose_entry[18])
             current_poses.append(pose)
 
         if not no_display:
@@ -122,7 +121,7 @@ def run_demo(net, image_provider, height_size, cpu, track, smooth,no_display):
                 previous_poses = current_poses
             for pose in current_poses:
                 pose.draw(img)
-            #img = cv2.addWeighted(orig_img, 0.6, img, 0.9, 0)
+                
             for pose in current_poses:
                 cv2.rectangle(img, (pose.bbox[0], pose.bbox[1]),
                               (pose.bbox[0] + pose.bbox[2], pose.bbox[1] + pose.bbox[3]), (32, 202, 252))
@@ -131,13 +130,8 @@ def run_demo(net, image_provider, height_size, cpu, track, smooth,no_display):
                                 cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 255))
             cv2.imshow('PoseCamera', img)
             key = cv2.waitKey(delay)
-            if key == 27:  # esc
+            if key == 27:
                 return
-            elif key == 112:  # 'p'
-                if delay == 33:
-                    delay = 0
-                else:
-                    delay = 100
 
 
 if __name__ == '__main__':

@@ -52,14 +52,14 @@ def pad_width(img, stride, pad_value, min_dims):
 def convert_to_coco_format(pose_entries, all_keypoints):
     coco_keypoints = []
     scores = []
-    for n in range(len(pose_entries)):
-        if len(pose_entries[n]) == 0:
+    for n, pose_entry in enumerate(pose_entries):
+        if len(pose_entry) == 0:
             continue
         keypoints = [0] * 17 * 3
         to_coco_map = [0, -1, 6, 8, 10, 5, 7, 9, 12, 14, 16, 11, 13, 15, 2, 1, 4, 3]
-        person_score = pose_entries[n][-2]
+        person_score = pose_entry[-2]
         position_id = -1
-        for keypoint_id in pose_entries[n][:-2]:
+        for keypoint_id in pose_entry[:-2]:
             position_id += 1
             if position_id == 1:  # no 'neck' in COCO
                 continue
@@ -74,7 +74,7 @@ def convert_to_coco_format(pose_entries, all_keypoints):
             keypoints[to_coco_map[position_id] * 3 + 1] = cy
             keypoints[to_coco_map[position_id] * 3 + 2] = visibility
         coco_keypoints.append(keypoints)
-        scores.append(person_score * max(0, (pose_entries[n][-1] - 1)))  # -1 for 'neck'
+        scores.append(person_score * max(0, (pose_entry[-1] - 1)))  # -1 for 'neck'
     return coco_keypoints, scores
 
 
@@ -136,11 +136,11 @@ def evaluate(labels, output_name, images_folder, net, multiscale=False, visualiz
         coco_keypoints, scores = convert_to_coco_format(pose_entries, all_keypoints)
 
         image_id = int(file_name[0:file_name.rfind('.')])
-        for idx in range(len(coco_keypoints)):
+        for idx, coco_keypoint in enumerate(coco_keypoints):
             coco_result.append({
                 'image_id': image_id,
                 'category_id': 1,  # person
-                'keypoints': coco_keypoints[idx],
+                'keypoints': coco_keypoint,
                 'score': scores[idx]
             })
 

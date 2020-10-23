@@ -49,15 +49,15 @@ class CocoTrainDataset(Dataset):
         keypoint_maps = self._generate_keypoint_maps(sample)
         sample['keypoint_maps'] = keypoint_maps
         keypoint_mask = np.zeros(shape=keypoint_maps.shape, dtype=np.float32)
-        for idx in range(keypoint_mask.shape[0]):
-            keypoint_mask[idx] = mask
+        for id in range(keypoint_mask.shape[0]):
+            keypoint_mask[id] = mask
         sample['keypoint_mask'] = keypoint_mask
 
         paf_maps = self._generate_paf_maps(sample)
         sample['paf_maps'] = paf_maps
         paf_mask = np.zeros(shape=paf_maps.shape, dtype=np.float32)
-        for idx in range(paf_mask.shape[0]):
-            paf_mask[idx] = mask
+        for id in range(paf_mask.shape[0]):
+            paf_mask[id] = mask
         sample['paf_mask'] = paf_mask
 
         image = sample['image'].astype(np.float32)

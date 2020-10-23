@@ -122,4 +122,3 @@ if __name__ == '__main__':
 
     with open(args.output_name, 'wb') as f:
         pickle.dump(prepared_annotations, f)
-
