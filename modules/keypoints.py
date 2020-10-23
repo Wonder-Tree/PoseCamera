@@ -144,10 +144,10 @@ def group_keypoints(all_keypoints_by_type, pafs, pose_entry_size=20, min_paf_sco
         has_kpt_a = np.zeros(num_kpts_a, dtype=np.int32)
         has_kpt_b = np.zeros(num_kpts_b, dtype=np.int32)
         filtered_connections = []
-        for row in range(len(connections)):
+        for row, connection in enumerate(connections):
             if len(filtered_connections) == num_connections:
                 break
-            i, j, cur_point_score = connections[row][0:3]
+            i, j, cur_point_score = connection[0:3]
             if not has_kpt_a[i] and not has_kpt_b[j]:
                 filtered_connections.append([kpts_a[i][3], kpts_b[j][3], cur_point_score])
                 has_kpt_a[i] = 1
