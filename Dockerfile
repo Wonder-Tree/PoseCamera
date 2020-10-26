@@ -4,12 +4,12 @@ FROM anibali/pytorch:1.5.0-cuda10.2
 USER root
 
 # Install Packages
-RUN apt-get update 
-
-RUN apt-get install -y wget build-essential cmake git unzip 
-
-RUN apt-get install -y libavcodec-dev libavformat-dev libswscale-dev libgtk-3-dev 
-
+RUN apt-get update && apt-get install -y --no-install-recommends python \
+ wget build-essential cmake git unzip \
+ libavcodec-dev libavformat-dev libswscale-dev libgtk-3-dev \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+ 
 # Clone PoseCamera repo
 COPY . /PoseCamera
 

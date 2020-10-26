@@ -44,4 +44,3 @@ if __name__ == '__main__':
 
     with open(args.output_name, 'w') as f:
         json.dump(subset, f, indent=4)
-
