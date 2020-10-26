@@ -7,6 +7,7 @@
 	- [Introduction](pages/realtime-inferencing.md)
 	- [Prediction on live webcam](pages/realtime-inferencing.md#prediction-on-live-webcam)
 	- [Inference on images](pages/realtime-inferencing.md#inference-on-images)
+    - [Use as REST API](pages/realtime-inferencing.md#use-as-rest-api)
 
 - Training
 	- [Prerequisite](pages/training.md#prerequisites)

@@ -19,7 +19,7 @@ xhost +; docker run --name posecamera --rm --gpus all -e DISPLAY=$DISPLAY --devi
 
 To run inference on images use following command.
 ```sh
-docker run --name posecamera --rm -e DISPLAY=$DISPLAY  wondertree/posecamera --images ./demo/female_pose.jpg --cpu
+docker run --name posecamera --rm -e DISPLAY=$DISPLAY  wondertree/posecamera --images ./tmp/female_pose.jpg --cpu
 ```
 
 For more details read our [Docs](https://wonder-tree.github.io/PoseCamera)

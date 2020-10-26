@@ -51,22 +51,22 @@ def extract_keypoints(heatmap, all_keypoints, total_keypoint_num):
 def group_keypoints(all_keypoints_by_type, pafs, pose_entry_size=20, min_paf_score=0.05, demo=False):
     pose_entries = []
     all_keypoints = np.array([item for sublist in all_keypoints_by_type for item in sublist])
-    for part_id, body_part in enumerate(BODY_PARTS_PAF_IDS):
-        part_pafs = pafs[:, :, body_part]
-        kpts_a = all_keypoints_by_type[body_part[0]]
-        kpts_b = all_keypoints_by_type[body_part[1]]
+    for part_id in range(len(BODY_PARTS_PAF_IDS)):
+        part_pafs = pafs[:, :, BODY_PARTS_PAF_IDS[part_id]]
+        kpts_a = all_keypoints_by_type[BODY_PARTS_KPT_IDS[part_id][0]]
+        kpts_b = all_keypoints_by_type[BODY_PARTS_KPT_IDS[part_id][1]]
         num_kpts_a = len(kpts_a)
         num_kpts_b = len(kpts_b)
-        kpt_a_id = body_part[0]
-        kpt_b_id = body_part[1]
+        kpt_a_id = BODY_PARTS_KPT_IDS[part_id][0]
+        kpt_b_id = BODY_PARTS_KPT_IDS[part_id][1]
 
         if num_kpts_a == 0 and num_kpts_b == 0:  # no keypoints for such body part
             continue
         elif num_kpts_a == 0:  # body part has just 'b' keypoints
             for i in range(num_kpts_b):
                 num = 0
-                for j, pose_entry in enumerate(pose_entries):  # check if already in some pose, was added by another body part
-                    if pose_entry[kpt_b_id] == kpts_b[i][3]:
+                for j in range(len(pose_entries)):  # check if already in some pose, was added by another body part
+                    if pose_entries[j][kpt_b_id] == kpts_b[i][3]:
                         num += 1
                         continue
                 if num == 0:
@@ -79,8 +79,8 @@ def group_keypoints(all_keypoints_by_type, pafs, pose_entry_size=20, min_paf_sco
         elif num_kpts_b == 0:  # body part has just 'a' keypoints
             for i in range(num_kpts_a):
                 num = 0
-                for j, pose_entry in enumerate(pose_entries):
-                    if pose_entry[kpt_a_id] == kpts_a[i][3]:
+                for j in range(len(pose_entries)):
+                    if pose_entries[j][kpt_a_id] == kpts_a[i][3]:
                         num += 1
                         continue
                 if num == 0:
@@ -144,10 +144,10 @@ def group_keypoints(all_keypoints_by_type, pafs, pose_entry_size=20, min_paf_sco
         has_kpt_a = np.zeros(num_kpts_a, dtype=np.int32)
         has_kpt_b = np.zeros(num_kpts_b, dtype=np.int32)
         filtered_connections = []
-        for row, connection in enumerate(connections):
+        for row in range(len(connections)):
             if len(filtered_connections) == num_connections:
                 break
-            i, j, cur_point_score = connection[0:3]
+            i, j, cur_point_score = connections[row][0:3]
             if not has_kpt_a[i] and not has_kpt_b[j]:
                 filtered_connections.append([kpts_a[i][3], kpts_b[j][3], cur_point_score])
                 has_kpt_a[i] = 1
@@ -158,44 +158,44 @@ def group_keypoints(all_keypoints_by_type, pafs, pose_entry_size=20, min_paf_sco
 
         if part_id == 0:
             pose_entries = [np.ones(pose_entry_size) * -1 for _ in range(len(connections))]
-            for i,connection in enumerate(connections):
-                pose_entries[i][BODY_PARTS_KPT_IDS[0][0]] = connection[0]
-                pose_entries[i][BODY_PARTS_KPT_IDS[0][1]] = connection[1]
+            for i in range(len(connections)):
+                pose_entries[i][BODY_PARTS_KPT_IDS[0][0]] = connections[i][0]
+                pose_entries[i][BODY_PARTS_KPT_IDS[0][1]] = connections[i][1]
                 pose_entries[i][-1] = 2
-                pose_entries[i][-2] = np.sum(all_keypoints[connection[0:2], 2]) + connection[2]
+                pose_entries[i][-2] = np.sum(all_keypoints[connections[i][0:2], 2]) + connections[i][2]
         elif part_id == 17 or part_id == 18:
             kpt_a_id = BODY_PARTS_KPT_IDS[part_id][0]
             kpt_b_id = BODY_PARTS_KPT_IDS[part_id][1]
-            for i,connection in enumerate(connections):
-                for j, item in enumerate(pose_entries):
-                    if item[kpt_a_id] == connection[0] and item[kpt_b_id] == -1:
-                        item[kpt_b_id] = connection[1]
-                    elif item[kpt_b_id] == connection[1] and item[kpt_a_id] == -1:
-                        item[kpt_a_id] = connection[0]
+            for i in range(len(connections)):
+                for j in range(len(pose_entries)):
+                    if pose_entries[j][kpt_a_id] == connections[i][0] and pose_entries[j][kpt_b_id] == -1:
+                        pose_entries[j][kpt_b_id] = connections[i][1]
+                    elif pose_entries[j][kpt_b_id] == connections[i][1] and pose_entries[j][kpt_a_id] == -1:
+                        pose_entries[j][kpt_a_id] = connections[i][0]
             continue
         else:
             kpt_a_id = BODY_PARTS_KPT_IDS[part_id][0]
             kpt_b_id = BODY_PARTS_KPT_IDS[part_id][1]
             for i in range(len(connections)):
                 num = 0
-                for j, item in enumerate(pose_entries):
-                    if item[kpt_a_id] == connection[0]:
-                        item[kpt_b_id] = connection[1]
+                for j in range(len(pose_entries)):
+                    if pose_entries[j][kpt_a_id] == connections[i][0]:
+                        pose_entries[j][kpt_b_id] = connections[i][1]
                         num += 1
-                        item[-1] += 1
-                        item[-2] += all_keypoints[connection[1], 2] + connection[2]
+                        pose_entries[j][-1] += 1
+                        pose_entries[j][-2] += all_keypoints[connections[i][1], 2] + connections[i][2]
                 if num == 0:
                     pose_entry = np.ones(pose_entry_size) * -1
-                    pose_entry[kpt_a_id] = connection[0]
-                    pose_entry[kpt_b_id] = connection[1]
+                    pose_entry[kpt_a_id] = connections[i][0]
+                    pose_entry[kpt_b_id] = connections[i][1]
                     pose_entry[-1] = 2
-                    pose_entry[-2] = np.sum(all_keypoints[connection[0:2], 2]) + connection[2]
+                    pose_entry[-2] = np.sum(all_keypoints[connections[i][0:2], 2]) + connections[i][2]
                     pose_entries.append(pose_entry)
 
     filtered_entries = []
-    for i, pose_entry in enumerate(pose_entries):
-        if pose_entry[-1] < 3 or (pose_entry[-2] / pose_entry[-1] < 0.2):
+    for i in range(len(pose_entries)):
+        if pose_entries[i][-1] < 3 or (pose_entries[i][-2] / pose_entries[i][-1] < 0.2):
             continue
-        filtered_entries.append(pose_entry)
+        filtered_entries.append(pose_entries[i])
     pose_entries = np.asarray(filtered_entries)
     return pose_entries, all_keypoints
