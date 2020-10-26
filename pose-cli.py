@@ -1,54 +1,46 @@
 import argparse
+import os
 
 import cv2
 import numpy as np
 import torch
+from werkzeug.utils import secure_filename
 
 from models.with_mobilenet import PoseEstimationWithMobileNet
+from modules.file_providers import ImageReader, VideoReader
 from modules.keypoints import extract_keypoints, group_keypoints
 from modules.load_state import load_state
 from modules.pose import Pose, track_poses
 from val import normalize, pad_width
 
+from flask import Flask, request, render_template, json
 
-class ImageReader(object):
-    def __init__(self, file_names):
-        self.file_names = file_names
-        self.max_idx = len(file_names)
+app = Flask(__name__)
+args =  None
 
-    def __iter__(self):
-        self.idx = 0
-        return self
+UPLOAD_DIR = './tmp'
 
-    def __next__(self):
-        if self.idx == self.max_idx:
-            raise StopIteration
-        img = cv2.imread(self.file_names[self.idx], cv2.IMREAD_COLOR)
-        if img.size == 0:
-            raise IOError('Image {} cannot be read'.format(self.file_names[self.idx]))
-        self.idx = self.idx + 1
-        return img
+@app.route('/', methods=['GET', 'POST'])
+def detect():
+    global args
+    if request.method == 'GET':
+        return render_template('docs.html')
+    else:
+        image_files = []
+        for name in request.files:
+            file = request.files[name]
+            file_path = os.path.join(UPLOAD_DIR, secure_filename(file.filename))
 
+            file.save(file_path)
+            image_files.append(file_path)
 
-class VideoReader(object):
-    def __init__(self, file_name):
-        self.file_name = file_name
-        try:  # OpenCV needs int to read from webcam
-            self.file_name = int(file_name)
-        except ValueError:
-            pass
+        pose_results = run_inference(net, ImageReader(image_files), args.height_size, args.cpu, args.track, args.smooth, args.no_display, True)
+        pose_keypoints = [pose.keypoints.tolist() for pose in pose_results]
 
-    def __iter__(self):
-        self.cap = cv2.VideoCapture(self.file_name)
-        if not self.cap.isOpened():
-            raise IOError('Video {} cannot be opened'.format(self.file_name))
-        return self
-
-    def __next__(self):
-        was_read, img = self.cap.read()
-        if not was_read:
-            raise StopIteration
-        return img
+        return app.response_class(
+            response=json.dumps(pose_keypoints),
+            mimetype='application/json'
+        )
 
 
 def infer_fast(net, img, net_input_height_size, stride, upsample_ratio, cpu, 
@@ -78,7 +70,7 @@ def infer_fast(net, img, net_input_height_size, stride, upsample_ratio, cpu,
     return heatmaps, pafs, scale, pad
 
 
-def run_demo(net, image_provider, height_size, cpu, track, smooth,no_display):
+def run_inference(net, image_provider, height_size, cpu, track, smooth, no_display, json_view = False):
     net = net.eval()
     if not cpu:
         net = net.cuda()
@@ -115,6 +107,9 @@ def run_demo(net, image_provider, height_size, cpu, track, smooth,no_display):
             pose = Pose(pose_keypoints, pose_entry[18])
             current_poses.append(pose)
 
+        if json_view == True:
+            return current_poses
+
         if not no_display:
             if track:
                 track_poses(previous_poses, current_poses, smooth=smooth)
@@ -144,19 +139,25 @@ if __name__ == '__main__':
     parser.add_argument('--track', type=int, default=0, help='track pose id in video')
     parser.add_argument('--smooth', type=int, default=1, help='smooth pose keypoints')
     parser.add_argument('--no-display', action='store_true', help='hide gui')
+    parser.add_argument('--http-server', action='store_true', help='starts http server')
+    parser.add_argument('--port', type=int, default=8080, help='http server port')
+
     args = parser.parse_args()
 
-    if args.video == '' and args.images == '':
-        raise ValueError('Either --video or --image has to be provided')
+    if args.video == '' and args.images == '' and  not args.http_server:
+        raise ValueError('--video, --image or --http-server has to be provided ')
 
     net = PoseEstimationWithMobileNet()
     checkpoint = torch.load(args.checkpoint_path, map_location='cpu')
     load_state(net, checkpoint)
 
-    frame_provider = ImageReader(args.images)
-    if args.video != '':
-        frame_provider = VideoReader(args.video)
+    if args.http_server:
+        app.run(port = args.port, debug = True)
     else:
-        args.track = 0
+        frame_provider = ImageReader(args.images)
+        if args.video != '':
+            frame_provider = VideoReader(args.video)
+        else:
+            args.track = 0
 
-    run_demo(net, frame_provider, args.height_size, args.cpu, args.track, args.smooth, args.no_display)
+        run_inference(net, frame_provider, args.height_size, args.cpu, args.track, args.smooth, args.no_display)

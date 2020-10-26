@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PoseCamera | Realtime Human Pose Estimatio</title>
+</head>
+  <style>
+    body{
+      margin: 0;
+      font-family: "Arial"
+    }
+    .container{
+      width: 600px;
+      margin: 0 auto;
+    }
+  </style>
+<body>
+
+  <div class="container">
+    <h1>PoseCamera</h1>
+    <h3>Realtime Human Pose Estimation</h3>
+    <p>
+      Use following curl command to send image using http request
+    </p>
+    <pre>
+      curl -v -F 'upload=@\"./temp/file.jpg\"' http:/localhost:8080
+    </pre>
+    <p>
+      Response (JSON type) will contain list of keypoints of each human body in image.
+    </p>
+    <pre>
+      [
+        [
+          [
+            367,
+            114
+          ],
+          [
+            359,
+            222
+          ],
+          ...
+        ],
+        [
+         ...
+        ]
+      ]
+    </pre>
+    <p>
+      Each array contains [x, y] coordinated of each keypoint and keypoints are ordered according to following list</p>
+    <p>
+      <i>[nose, neck,right shoulder, right elbow, r wrist, left shoder, left elbow, left wrist,right hip, right knee, right ankle, left hip, left knee, left ankle,right eye, left eye,right ear, left ear]</i>
+    </p>
+  </div>
+
+</body>
+</html>
