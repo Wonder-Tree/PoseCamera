@@ -7,9 +7,12 @@
 
 PoseCamera is python based SDK for multi human pose estimation through RGB webcam.
 
-## Installation
-install posecamera package thorugh ***pip***
-`pip install posecamera`
+## Install
+install posecamera package through pip
+```
+pip install posecamera
+```
+
 If you are installation on Windows OS please see some [troubleshoots](https://wonder-tree.github.io/PoseCamera/#/pages/troubleshooting) 
 
 ## Usage
@@ -29,7 +32,7 @@ cv2.waitKey(0)
 ```
 
 output of above example
-![PoseCamera example output](https://github.com/Wonder-Tree/PoseCamera/blob/testing/output.png?raw=true)
+![PoseCamera example output](https://github.com/Wonder-Tree/PoseCamera/blob/testing/tmp/output.png?raw=true)
 
 or get keypoints array
 ```
