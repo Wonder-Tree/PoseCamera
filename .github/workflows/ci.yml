@@ -23,8 +23,6 @@ jobs:
         pip install -r requirements.txt
     - name: Install system dependencies
       run: sudo apt install libgflags-dev libopencv-dev wget
-    - name: Download pre-trained model
-      run: wget https://storage.googleapis.com/wt_storage/checkpoint_iter_50000.pth
     - name: Build project
       run: |
-        python pose-cli.py --checkpoint-path ./checkpoint_iter_50000.pth --cpu --no-display --images ./tmp/female_pose.jpg
+        python pose-cli.py --cpu --no-display --images ./tmp/female_pose.jpg

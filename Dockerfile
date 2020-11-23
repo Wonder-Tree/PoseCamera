@@ -23,9 +23,6 @@ RUN pip install pycocotools==2.0.0 --ignore-installed
 # Install Dependencies
 RUN cd /PoseCamera && pip install -r requirements.txt
 
-# Download pre-trained model file
-RUN curl -o /PoseCamera/checkpoint_iter_50000.pth https://storage.googleapis.com/wt_storage/checkpoint_iter_50000.pth
-
 # Run app
 WORKDIR /PoseCamera
-ENTRYPOINT ["python", "pose-cli.py"]
+ENTRYPOINT ["python", "posecamera/pose-cli.py"]

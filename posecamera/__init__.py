@@ -1,4 +1,2 @@
-from .api import config, detect
-
-# -*- init model config -*-
+from .api import config, estimate
 config()

@@ -3,18 +3,17 @@ import cv2
 import numpy as np
 import torch
 import wget
-from os.path import expanduser
+import os
 
-from models.with_mobilenet import PoseEstimationWithMobileNet
-from modules.keypoints import extract_keypoints, group_keypoints
-from modules.load_state import load_state
-from modules.pose import Pose, track_poses
-from val import normalize, pad_width
+from .models.with_mobilenet import PoseEstimationWithMobileNet
+from .modules.keypoints import extract_keypoints, group_keypoints
+from .modules.load_state import load_state
+from .modules.pose import Pose, track_poses
+from .val import normalize, pad_width
 
-expanduser("~"), '.posecamera'
-weights = osp.join(expanduser("~"),'.posecamera','checkpoint_iter.pth')
-if not osp.exists(weights):
-    os.makedirs(osp.dirname(weights), exist_ok=True)
+weights = os.path.join(os.path.expanduser("~"),'.posecamera','checkpoint_iter.pth')
+if not os.path.exists(weights):
+    os.makedirs(os.path.dirname(weights), exist_ok=True)
     wget.download("https://storage.googleapis.com/wt_storage/checkpoint_iter_50000.pth", weights)
 
 net = PoseEstimationWithMobileNet()
@@ -25,11 +24,15 @@ stride = 8
 upsample_ratio = 4
 num_keypoints = Pose.num_kpts
 cpu = True
+smooth = True
 
-def config(stride = 8, upsample_ratio = 4,  cpu = True):
+def config(stride = 8, upsample_ratio = 4, smooth = True,  cpu = True):
     stride = stride
     upsample_ratio = upsample_ratio
+    smooth = smooth
+    cpu = cpu
 
+    global net
     if not cpu:
         net = net.cuda()
     else:
@@ -61,7 +64,8 @@ def _inference(net, img, net_input_height_size, stride, upsample_ratio, cpu,
 
     return heatmaps, pafs, scale, pad
 
-def detect(img, height_size = 256):
+def estimate(img, height_size = 256):
+    global net
     heatmaps, pafs, scale, pad = _inference(net, img, height_size, stride, upsample_ratio, cpu)
     total_keypoints_num = 0
     all_keypoints_by_type = []
