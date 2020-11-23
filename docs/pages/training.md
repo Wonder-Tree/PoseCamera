@@ -1,5 +1,11 @@
 # Training on your own data
 
+Clone PoseCamera repository
+```
+git clone https://github.com/Wonder-Tree/PoseCamera/
+```
+and configure and run following scripts.
+
 ## Prerequisites
 * Download COCO dataset 2017 [http://cocodataset.org/#download](http://cocodataset.org/#download) (train, val, annotations) and unpack it to <COCO_HOME> directory.
 * You can use your dataset but make sure it's in COCO annotations format [more info](https://www.immersivelimit.com/tutorials/create-coco-annotations-from-scratch#:~:text=The%20COCO%20bounding%20box%20format,other%20annotations%20in%20the%20dataset). 
