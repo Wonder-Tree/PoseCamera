@@ -28,6 +28,8 @@ jobs:
         pip install -r requirements.txt
     - name: Install system dependencies
       run: sudo apt install libgflags-dev libopencv-dev wget
+    - name: Setup PYTHONPATH
+      run: export PYTHONPATH=$PYTHONPATH:$PWD && echo $PWD
     - name: Build project
       run: |
         python posecamera/cli.py --cpu --no-display --images ./tmp/female_pose.jpg

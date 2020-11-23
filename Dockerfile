@@ -23,6 +23,9 @@ RUN pip install pycocotools==2.0.0 --ignore-installed
 # Install Dependencies
 RUN cd /PoseCamera && pip install -r requirements.txt
 
+# Setup PYTHONPATH
+RUN export PYTHONPATH=$PYTHONPATH:/PoseCamera
+
 # Run app
 WORKDIR /PoseCamera
 ENTRYPOINT ["python", "posecamera/cli.py"]
