@@ -1,6 +1,11 @@
 # This workflows will download pre-trained model and run inference on demo images using cpu
 name: build
-on: [push, pull_request]:
+on:
+  push:
+    branches:
+      - master
+      - testing
+  pull_request:
     branches:
       - master
       - testing
@@ -25,4 +30,4 @@ jobs:
       run: sudo apt install libgflags-dev libopencv-dev wget
     - name: Build project
       run: |
-        python pose-cli.py --images ./tmp/female_pose.jpg --cpu --no-display 
+        python pose-cli.py --cpu --no-display --images ./tmp/female_pose.jpg
