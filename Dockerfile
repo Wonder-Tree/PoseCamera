@@ -26,6 +26,9 @@ RUN cd /PoseCamera && pip install -r requirements.txt
 # Setup PYTHONPATH
 RUN export PYTHONPATH=$PYTHONPATH:/PoseCamera
 
-# Run app
+# Build Package
 WORKDIR /PoseCamera
-ENTRYPOINT ["python", "posecamera/cli.py"]
+RUN pip install setuptools wheel && pip install .
+
+# Run app
+ENTRYPOINT ["posecamera"]
