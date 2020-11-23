@@ -25,4 +25,4 @@ RUN cd /PoseCamera && pip install -r requirements.txt
 
 # Run app
 WORKDIR /PoseCamera
-ENTRYPOINT ["python", "posecamera/pose-cli.py"]
+ENTRYPOINT ["python", "posecamera/cli.py"]
