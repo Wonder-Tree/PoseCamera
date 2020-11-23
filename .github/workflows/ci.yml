@@ -30,4 +30,4 @@ jobs:
       run: sudo apt install libgflags-dev libopencv-dev wget
     - name: Build project
       run: |
-        python posecamera/pose-cli.py --cpu --no-display --images ./tmp/female_pose.jpg
+        python ./posecamera/pose-cli.py --cpu --no-display --images ./tmp/female_pose.jpg
