@@ -3,12 +3,11 @@ import os
 
 import cv2
 import numpy as np
-import torch
 from werkzeug.utils import secure_filename
 
-from modules.file_providers import ImageReader, VideoReader
+from posecamera.modules.file_providers import ImageReader, VideoReader
 from posecamera.api import config, estimate
-from modules.pose import Pose, track_poses
+from posecamera.modules.pose import Pose, track_poses
 
 
 from flask import Flask, request, render_template, json

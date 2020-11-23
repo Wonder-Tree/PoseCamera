@@ -5,11 +5,11 @@ import torch
 import wget
 import os
 
-from .models.with_mobilenet import PoseEstimationWithMobileNet
-from .modules.keypoints import extract_keypoints, group_keypoints
-from .modules.load_state import load_state
-from .modules.pose import Pose, track_poses
-from .val import normalize, pad_width
+from posecamera.models.with_mobilenet import PoseEstimationWithMobileNet
+from posecamera.modules.keypoints import extract_keypoints, group_keypoints
+from posecamera.modules.load_state import load_state
+from posecamera.modules.pose import Pose, track_poses
+from posecamera.val import normalize, pad_width
 
 weights = os.path.join(os.path.expanduser("~"),'.posecamera','checkpoint_iter.pth')
 if not os.path.exists(weights):

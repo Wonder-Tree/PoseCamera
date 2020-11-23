@@ -1,9 +1,9 @@
 # This workflows will download pre-trained model and run inference on demo images using cpu
 name: build
-on:
-  push:
+on: [push, pull_request]:
     branches:
       - master
+      - testing
 jobs:
   deploy:
     runs-on: ubuntu-18.04

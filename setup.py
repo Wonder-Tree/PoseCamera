@@ -1,5 +1,5 @@
 import pathlib
-from setuptools import setup
+from setuptools import setup, find_packages
 
 current_dir = pathlib.Path(__file__).parent
 
@@ -8,7 +8,7 @@ REQUIREMENTS = (current_dir / "requirements.txt").read_text().splitlines()
 
 setup(
     name="posecamera",
-    version="1.0.0",
+    version="1.0.4",
     description="Realtime Human Pose Estimation",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -22,7 +22,7 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
     ],
-    packages=["posecamera"],
+    packages= find_packages(),
     include_package_data=True,
     install_requires = REQUIREMENTS,
     entry_points={
