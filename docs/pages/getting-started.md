@@ -7,13 +7,9 @@ PoseCamera is multi human pose estimation software based on Openpose architectur
 * [CUDA 10.1](https://developer.nvidia.com/cuda-downloads) and [cudnn](https://developer.nvidia.com/cudnn)
 
 ## Installation
-To install PoseCamera clone this repo locally. 
+install posecamera package through pip
 ```
-git clone https://github.com/Wonder-Tree/PoseCamera
+pip install posecamera
 ```
 
-install python packages required to run PoseCamera
-```
-pip install requirements.txt
-```
-> Windows users' might face some issues regarding installing dependencies. [Read more](pages/troubleshooting.md) about issues related to Windows OS.
+If you are installation on Windows OS please see some [troubleshoots](https://wonder-tree.github.io/PoseCamera/#/pages/troubleshooting) 

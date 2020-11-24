@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - master
+      - testing
+  pull_request:
+    branches:
+      - master
+      - testing
 jobs:
   deploy:
     runs-on: ubuntu-18.04
@@ -23,8 +28,8 @@ jobs:
         pip install -r requirements.txt
     - name: Install system dependencies
       run: sudo apt install libgflags-dev libopencv-dev wget
-    - name: Download pre-trained model
-      run: wget https://storage.googleapis.com/wt_storage/checkpoint_iter_50000.pth
     - name: Build project
       run: |
-        python pose-cli.py --checkpoint-path ./checkpoint_iter_50000.pth --cpu --no-display --images ./tmp/female_pose.jpg
+        pip install setuptools wheel
+        pip install .
+        posecamera --cpu --no-display --images ./tmp/female_pose.jpg
