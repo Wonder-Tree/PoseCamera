@@ -47,13 +47,13 @@ The official docker image is hosted on [Docker Hub](https://hub.docker.com/r/won
 
 Doing inference on live webcam feed.
 ```sh
-xhost +; docker run --name posecamera --rm --gpus all -e DISPLAY=$DISPLAY --device=/dev/video0:/dev/video0 wondertree/posecamera --video=0
+xhost +; docker run --name posecamera --rm --net=host --gpus all -e DISPLAY=$DISPLAY --device=/dev/video0:/dev/video0 wondertree/posecamera --video=0
 ```
 > GPU & Webcam support (if running docker) is not available on Windows Operating System. 
 
 To run inference on images use following command.
 ```sh
-docker run --name posecamera --rm -e DISPLAY=$DISPLAY  wondertree/posecamera --images ./tmp/female_pose.jpg --cpu
+docker run --name posecamera --rm --net=host -e DISPLAY=$DISPLAY  wondertree/posecamera --images ./tmp/female_pose.jpg --cpu
 ```
 
 For more details read our [Docs](https://wonder-tree.github.io/PoseCamera)
