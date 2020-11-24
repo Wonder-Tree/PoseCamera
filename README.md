@@ -13,12 +13,11 @@ install posecamera package through pip
 ```
 pip install posecamera
 ```
-
-If you are installation on Windows OS please see some [troubleshoots](https://wonder-tree.github.io/PoseCamera/#/pages/troubleshooting) 
+If you have issues with instalation on Windows OS then check this [page](https://wonder-tree.github.io/PoseCamera/#/pages/troubleshooting) 
 
 ## Usage
 
-draw pose keypoints on image
+How to draw the pose keypoints on image
 ```
 import posecamera
 import cv2
@@ -32,10 +31,10 @@ cv2.imshow("PoseCamera", image)
 cv2.waitKey(0)
 ```
 
-output of above example
+Output of the above example
 ![PoseCamera example output](https://github.com/Wonder-Tree/PoseCamera/blob/master/tmp/output.png?raw=true)
 
-or get keypoints array
+How to get the keypoints array
 ```
 for pose in poses:
     keypoints = pose.keypoints
