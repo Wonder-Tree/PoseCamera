@@ -23,7 +23,7 @@ draw pose keypoints on image
 import posecamera
 import cv2
 
-image = cv2.imread("./tmp/female_pose.jpg")
+image = cv2.imread("example.jpg")
 poses = posecamera.estimate(image)
 for pose in poses:
     pose.draw(image)
@@ -33,7 +33,7 @@ cv2.waitKey(0)
 ```
 
 output of above example
-![PoseCamera example output](https://github.com/Wonder-Tree/PoseCamera/blob/testing/tmp/output.png?raw=true)
+![PoseCamera example output](https://github.com/Wonder-Tree/PoseCamera/blob/master/tmp/output.png?raw=true)
 
 or get keypoints array
 ```
@@ -42,7 +42,7 @@ for pose in poses:
 ```
 
 ### Using Docker
-The official docker image is hosted on [Docker Hub](https://hub.docker.com/r/wondertree/posecamera). The very first step is to install the docker [docker](https://docs.docker.com/get-docker/) on your system. You can also use ```pose-cli.py``` locally with installing all dependencies listed in ```requirements.txt```. 
+The official docker image is hosted on [Docker Hub](https://hub.docker.com/r/wondertree/posecamera). The very first step is to install the docker [docker](https://docs.docker.com/get-docker/) on your system. 
 > Also note that your Nvidia driver Needs to be compatible with CUDA10.2.
 
 Doing inference on live webcam feed.
