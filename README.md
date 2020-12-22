@@ -5,6 +5,7 @@
 [![PoseCamera Actions Status](https://github.com/Wonder-Tree/PoseCamera/workflows/build/badge.svg)](https://github.com/Wonder-Tree/PoseCamera/actions)
 <a href="https://storage.googleapis.com/wt_storage/checkpoint_iter_50000.pth" title="PreTrainedModels"><img src="https://img.shields.io/badge/trained%20model-Download-brightgreen"></a>
 [![CodeFactor](https://www.codefactor.io/repository/github/wonder-tree/posecamera/badge)](https://www.codefactor.io/repository/github/wonder-tree/posecamera)
+[![](https://img.shields.io/badge/-Docs-<COLOR>.svg)](https://wonder-tree.github.io/PoseCamera/#/)
 
 PoseCamera is python based SDK for multi human pose estimation through RGB webcam.
 
