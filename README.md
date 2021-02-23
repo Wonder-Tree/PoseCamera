@@ -6,6 +6,7 @@
 <a href="https://storage.googleapis.com/wt_storage/checkpoint_iter_50000.pth" title="PreTrainedModels"><img src="https://img.shields.io/badge/trained%20model-Download-brightgreen"></a>
 [![CodeFactor](https://www.codefactor.io/repository/github/wonder-tree/posecamera/badge)](https://www.codefactor.io/repository/github/wonder-tree/posecamera)
 [![](https://img.shields.io/badge/-Docs-<COLOR>.svg)](https://wonder-tree.github.io/PoseCamera/#/)
+[![](https://img.shields.io/badge/-Discussions-<COLOR>.svg)](https://github.com/Wonder-Tree/PoseCamera/discussions)
 
 PoseCamera is python based SDK for multi human pose estimation through RGB webcam.
 
@@ -14,7 +15,7 @@ install posecamera package through pip
 ```
 pip install posecamera
 ```
-If you have issues with instalation on Windows OS then check this [page](https://wonder-tree.github.io/PoseCamera/#/pages/troubleshooting) 
+If you are having issues with the installation on Windows OS then check this [page](https://wonder-tree.github.io/PoseCamera/#/pages/troubleshooting) 
 
 ## Usage
 
@@ -40,6 +41,8 @@ How to get the keypoints array
 for pose in poses:
     keypoints = pose.keypoints
 ```
+
+You can also check how to use the SDK in the [Game](https://github.com/Wonder-Tree/PoseCamera/tree/master/samples/space_shooter)
 
 ### Using Docker
 The official docker image is hosted on [Docker Hub](https://hub.docker.com/r/wondertree/posecamera). The very first step is to install the docker [docker](https://docs.docker.com/get-docker/) on your system. 
@@ -67,3 +70,6 @@ The base of this repository is based on the following research paper.
     year = {2018}
 }
 ```
+
+### Share your thoughts
+Join our [Discussion Channel](https://github.com/Wonder-Tree/PoseCamera/discussions)! We love to hear your ideas, suggestions or pull request
