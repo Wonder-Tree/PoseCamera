@@ -32,6 +32,8 @@ cv2.imshow("PoseCamera", image)
 cv2.waitKey(0)
 ```
 
+> Above example will automatically download the pretrained model. If you want to train your own model visit [Train your own model](https://wonder-tree.github.io/PoseCamera/#/pages/training?id=training-on-your-own-data)
+
 output of above example
 ![PoseCamera example output](https://github.com/Wonder-Tree/PoseCamera/blob/master/tmp/output.png?raw=true)
 
