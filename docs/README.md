@@ -1,25 +1,28 @@
-> **_NOTE:_**  Repository is still in development, please don't use for any production use.
+# README
 
-# PoseCamera
-[![PyPI version](https://badge.fury.io/py/posecamera.svg)](https://badge.fury.io/py/posecamera)
-[![PoseCamera Actions Status](https://github.com/Wonder-Tree/PoseCamera/workflows/build/badge.svg)](https://github.com/Wonder-Tree/PoseCamera/actions)
-<a href="https://storage.googleapis.com/wt_storage/checkpoint_iter_50000.pth" title="PreTrainedModels"><img src="https://img.shields.io/badge/trained%20model-Download-brightgreen"></a>
-[![CodeFactor](https://www.codefactor.io/repository/github/wonder-tree/posecamera/badge)](https://www.codefactor.io/repository/github/wonder-tree/posecamera)
+> _**NOTE:**_ Repository is still in development, please don't use for any production use.
+
+## PoseCamera
+
+[![PyPI version](https://badge.fury.io/py/posecamera.svg)](https://badge.fury.io/py/posecamera) [![PoseCamera Actions Status](https://github.com/Wonder-Tree/PoseCamera/workflows/build/badge.svg)](https://github.com/Wonder-Tree/PoseCamera/actions)  [![CodeFactor](https://www.codefactor.io/repository/github/wonder-tree/posecamera/badge)](https://www.codefactor.io/repository/github/wonder-tree/posecamera)
 
 PoseCamera is python based SDK for multi human pose estimation through RGB webcam.
 
-## Install
+### Install
+
 install posecamera package through pip
-```
+
+```text
 pip install posecamera
 ```
 
-If you are installation on Windows OS please see some [troubleshoots](https://wonder-tree.github.io/PoseCamera/#/pages/troubleshooting) 
+If you are installation on Windows OS please see some [troubleshoots](https://wonder-tree.github.io/PoseCamera/#/pages/troubleshooting)
 
-## Usage
+### Usage
 
 draw pose keypoints on image
-```
+
+```text
 import posecamera
 import cv2
 
@@ -34,34 +37,40 @@ cv2.waitKey(0)
 
 > Above example will automatically download the pretrained model. If you want to train your own model visit [Train your own model](https://wonder-tree.github.io/PoseCamera/#/pages/training?id=training-on-your-own-data)
 
-output of above example
-![PoseCamera example output](https://github.com/Wonder-Tree/PoseCamera/blob/master/tmp/output.png?raw=true)
+output of above example ![PoseCamera example output](https://github.com/Wonder-Tree/PoseCamera/blob/master/tmp/output.png?raw=true)
 
 or get keypoints array
-```
+
+```text
 for pose in poses:
     keypoints = pose.keypoints
 ```
 
-### Using Docker
-The official docker image is hosted on [Docker Hub](https://hub.docker.com/r/wondertree/posecamera). The very first step is to install the docker [docker](https://docs.docker.com/get-docker/) on your system. 
+#### Using Docker
+
+The official docker image is hosted on [Docker Hub](https://hub.docker.com/r/wondertree/posecamera). The very first step is to install the docker [docker](https://docs.docker.com/get-docker/) on your system.
+
 > Also note that your Nvidia driver Needs to be compatible with CUDA10.2.
 
 Doing inference on live webcam feed.
-```sh
+
+```bash
 xhost +; docker run --name posecamera --rm --net=host --gpus all -e DISPLAY=$DISPLAY --device=/dev/video0:/dev/video0 wondertree/posecamera --video=0
 ```
-> GPU & Webcam support (if running docker) is not available on Windows Operating System. 
+
+> GPU & Webcam support \(if running docker\) is not available on Windows Operating System.
 
 To run inference on images use following command.
-```sh
+
+```bash
 docker run --name posecamera --rm --net=host -e DISPLAY=$DISPLAY  wondertree/posecamera --images ./tmp/female_pose.jpg --cpu
 ```
 
 For more details read our [Docs](https://wonder-tree.github.io/PoseCamera)
 
 The base of this repository is based on the following research paper.
-```
+
+```text
 @inproceedings{osokin2018lightweight_openpose,
     author={Osokin, Daniil},
     title={Real-time 2D Multi-Person Pose Estimation on CPU: Lightweight OpenPose},
@@ -69,3 +78,4 @@ The base of this repository is based on the following research paper.
     year = {2018}
 }
 ```
+

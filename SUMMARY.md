@@ -1,0 +1,20 @@
+# Table of contents
+
+* [README](README.md)
+* [More Details](more-details/README.md)
+  * [Getting Started](more-details/getting-started/README.md)
+    * [Training on your own data](more-details/getting-started/training.md)
+  * [Realtime inferencing](more-details/realtime-inferencing.md)
+  * [Troubleshooting](more-details/troubleshooting.md)
+* [Untitled](untitled.md)
+* [README](docs/README.md)
+  * [pages](docs/pages.md)
+  * [summary](docs/summary.md)
+* [.github](.github/README.md)
+  * [ISSUE\_TEMPLATE](.github/issue_template/README.md)
+    * [feature\_request](.github/issue_template/feature_request.md)
+    * [bug\_report](.github/issue_template/bug_report.md)
+* [samples](samples/README.md)
+  * [README](samples/space_shooter.md)
+* [Contributing guidelines](contributing.md)
+
