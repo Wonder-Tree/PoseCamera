@@ -2,7 +2,7 @@
 
 ## Space Shooter
 
-Simple game in which you have to have to shoot meteoroids with you space craft and avoid meteoroids by moving left and right on your screen. Game uses our **PoseCamera** sdk to detect human body from webcam and controll space craft movement.
+Simple game in which you have to have to shoot meteoroids with your space craft and avoid meteoroids by moving left and right on your screen. Game uses our **PoseCamera** sdk to detect human body from webcam and controll space craft movement.
 
 ### How to build
 

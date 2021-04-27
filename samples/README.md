@@ -1,2 +1,2 @@
-# samples
+# Space Shooter
 
