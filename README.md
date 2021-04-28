@@ -16,7 +16,7 @@ install posecamera package through pip
 pip install posecamera
 ```
 
-If you are having issues with the installation on Windows OS then check this [page](https://wonder-tree.github.io/PoseCamera/#/pages/troubleshooting)
+If you are having issues with the installation on Windows OS then check this [page](https://usmankai.gitbook.io/posecamera-sdk/more-details/troubleshooting)
 
 ### Usage
 
@@ -35,7 +35,7 @@ cv2.imshow("PoseCamera", image)
 cv2.waitKey(0)
 ```
 
-> Above example will automatically download the pretrained model. If you want to train your own model visit [Train your own model](https://wonder-tree.github.io/PoseCamera/#/pages/training?id=training-on-your-own-data)
+> Above example will automatically download the pretrained model. If you want to train your own model visit [Train your own model](https://usmankai.gitbook.io/posecamera-sdk/more-details/training)
 
 output of the above example
 
@@ -70,7 +70,7 @@ To run inference on images use the following command.
 docker run --name posecamera --rm --net=host -e DISPLAY=$DISPLAY  wondertree/posecamera --images ./tmp/female_pose.jpg --cpu
 ```
 
-For more details read our [Docs](https://wonder-tree.github.io/PoseCamera)
+For more details read our [Docs](https://usmankai.gitbook.io/posecamera-sdk/more-details)
 
 The base of this repository is based on the following research paper.
 
