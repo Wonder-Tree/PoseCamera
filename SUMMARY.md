@@ -2,8 +2,8 @@
 
 * [README](README.md)
 * [More Details](more-details/README.md)
-  * [Getting Started](more-details/getting-started/README.md)
-    * [Training on your own data](more-details/getting-started/training.md)
+  * [Getting Started](more-details/getting-started.md)
+  * [Training on your own data](more-details/training.md)
   * [Realtime inferencing](more-details/realtime-inferencing.md)
   * [Troubleshooting](more-details/troubleshooting.md)
 * [Space Shooter](samples/README.md)
