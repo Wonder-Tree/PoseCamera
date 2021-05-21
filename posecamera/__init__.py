@@ -1,3 +1,1 @@
-from .api import config, estimate
-
-config()
+from .api import load, estimate

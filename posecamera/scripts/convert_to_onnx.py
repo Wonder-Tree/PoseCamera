@@ -2,8 +2,8 @@ import argparse
 
 import torch
 
-from models.with_mobilenet import PoseEstimationWithMobileNet
-from modules.load_state import load_state
+from posecamera.models.with_mobilenet import PoseEstimationWithMobileNet
+from posecamera.modules.load_state import load_state
 
 
 def convert_to_onnx(net, output_name):
@@ -23,7 +23,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     net = PoseEstimationWithMobileNet()
-    checkpoint = torch.load(args.checkpoint_path)
+    checkpoint = torch.load(args.checkpoint_path,map_location=torch.device('cpu'))
     load_state(net, checkpoint)
 
     convert_to_onnx(net, args.output_name)
