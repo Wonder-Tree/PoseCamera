@@ -41,7 +41,7 @@ cv2.waitKey(0)
 
 output of the above example
 
-![](tmp/assets/output.png)
+![](https://raw.githubusercontent.com/Wonder-Tree/PoseCamera/handtracking/tmp/output.png)
 
  
 
@@ -53,7 +53,8 @@ for pose in poses:
 ```
 
 output of handtracker (still in development)
-![](tmpk/assets/handtracker.png)
+
+![](https://raw.githubusercontent.com/Wonder-Tree/PoseCamera/handtracking/tmp/handtracker.png)
 
 #### Using Docker
 
