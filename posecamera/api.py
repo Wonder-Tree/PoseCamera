@@ -17,8 +17,6 @@ if not os.path.exists(weights):
     wget.download("https://storage.googleapis.com/wt_storage/checkpoint_iter_50000.pth", weights)
 
 net = PoseEstimationWithMobileNet()
-checkpoint = torch.load(weights, map_location='cpu')
-load_state(net, checkpoint)
 
 stride = 8
 upsample_ratio = 4
@@ -26,18 +24,19 @@ num_keypoints = Pose.num_kpts
 cpu = True
 smooth = True
 
-def config(stride = 8, upsample_ratio = 4, smooth = True,  cpu = True):
-    stride = stride
-    upsample_ratio = upsample_ratio
-    smooth = smooth
-    cpu = cpu
+def load(_weights,  _cpu = True, _stride = 8, _upsample_ratio = 4, _smooth = True) :
+    global net, stride, upsample_ratio, num_keypoints, cpu, smooth
 
-    global net
-    if not cpu:
-        net = net.cuda()
-    else:
-        net = net.eval()
+    stride = _stride
+    upsample_ratio = _upsample_ratio
+    smooth = _smooth
+    cpu = _cpu
 
+    checkpoint = torch.load(_weights, map_location='cpu')
+    load_state(net, checkpoint)
+
+    net = net.cpu() if cpu else net.cuda()
+    
 def _inference(net, img, net_input_height_size, stride, upsample_ratio, cpu, 
                pad_value=(0, 0, 0), img_mean=(128, 128, 128), img_scale=1/256):
     height, width, _ = img.shape

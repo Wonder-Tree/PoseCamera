@@ -63,3 +63,8 @@ target/
 .python-version
 
 .idea/
+
+# model files
+*.pth 
+*.tflite
+anchors.csv
