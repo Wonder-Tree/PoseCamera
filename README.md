@@ -12,7 +12,7 @@ install posecamera package through pip
 pip install posecamera
 ```
 
-If you are having issues with the installation on Windows OS then check this [page](https://usmankai.gitbook.io/posecamera-sdk/more-details/troubleshooting)
+If you are having issues with the installation on Windows OS then check this [page](https://wonder-tree.github.io/PoseCamera-Docs/#/pages/troubleshooting)
 
 ### Usage
 
@@ -39,7 +39,7 @@ cv2.waitKey(0)
 
 output of the above example
 
-![](https://raw.githubusercontent.com/Wonder-Tree/PoseCamera/handtracking/tmp/output.png)
+![](https://raw.githubusercontent.com/Wonder-Tree/PoseCamera/tmp/output.png)
 
  
 
@@ -80,7 +80,7 @@ SSD Generated Anchors
 https://storage.googleapis.com/wt_storage/anchors.csv
 
 
-![](https://raw.githubusercontent.com/Wonder-Tree/PoseCamera/handtracking/tmp/handtracker.png)
+![](https://raw.githubusercontent.com/Wonder-Tree/PoseCamera/tmp/handtracker.png)
 
 #### Using Docker
 
@@ -102,7 +102,7 @@ To run inference on images use the following command.
 docker run --name posecamera --rm --net=host -e DISPLAY=$DISPLAY  wondertree/posecamera --images ./tmp/female_pose.jpg --cpu
 ```
 
-For more details read our [Docs](https://usmankai.gitbook.io/posecamera-sdk/more-details)
+For more details read our [Docs](https://wonder-tree.github.io/PoseCamera-Docs/)
 
 The base of this repository is based on the following research paper.
 
