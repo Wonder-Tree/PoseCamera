@@ -16,6 +16,8 @@ If you are having issues with the installation on Windows OS then check this [pa
 
 ### Usage
 
+> See Google colab notebook https://colab.research.google.com/drive/18uoYeKmliOFV8dTdOrXocClCA7nTwRcX?usp=sharing
+
 draw pose keypoints on image
 
 ```python
@@ -70,8 +72,10 @@ cv2.waitKey(0)
 
 Palam Detections
 https://storage.googleapis.com/wt_storage/palm_detection_without_custom_op.tflite
+
 Hand Landmarks
 https://storage.googleapis.com/wt_storage/hand_landmark.tflite
+
 SSD Generated Anchors
 https://storage.googleapis.com/wt_storage/anchors.csv
 
