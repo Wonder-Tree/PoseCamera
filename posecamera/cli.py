@@ -1,12 +1,13 @@
 import argparse
 import os
 
+'''
 import cv2
 import numpy as np
 from werkzeug.utils import secure_filename
 
 from posecamera.modules.file_providers import ImageReader, VideoReader
-from posecamera.api import config, estimate
+from posecamera.api import load, estimate
 from posecamera.modules.pose import Pose, track_poses
 
 
@@ -72,7 +73,7 @@ def run_inference(image_provider, height_size, track, no_display, json_view = Fa
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--checkpoint-path', type=str, default='./checkpoint_iter_50000.pth', help='path to the checkpoint')
+    parser.add_argument('--checkpoint-path', type=str, default='./lightweight_pose_estimation.pth', help='path to the checkpoint')
     parser.add_argument('--height-size', type=int, default=256, help='network input layer height size')
     parser.add_argument('--video', type=str, default='', help='path to video file or camera id')
     parser.add_argument('--images', nargs='+', default='', help='path to input image(s)')
@@ -97,9 +98,12 @@ def main():
         else:
             args.track = 0
 
-        config(smooth = args.smooth, cpu = args.cpu)
-
+        load(_weights= args.checkpoint_path, smooth = args.smooth, cpu = args.cpu)
         run_inference(frame_provider, args.height_size, args.track, args.no_display)
 
 if __name__ == "__main__":
     main()
+'''
+
+def main():
+    print("Not implemented")
