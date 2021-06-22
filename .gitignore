@@ -67,3 +67,4 @@ target/
 # model files
 *.pth 
 *.tflite
+anchors.csv
