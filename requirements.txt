@@ -5,3 +5,6 @@ pycocotools==2.0.0
 matplotlib
 Flask
 wget
+tensorflow
+shapely
+scipy 
