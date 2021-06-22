@@ -39,7 +39,7 @@ cv2.waitKey(0)
 
 output of the above example
 
-![](https://raw.githubusercontent.com/Wonder-Tree/PoseCamera/tmp/output.png)
+![](https://raw.githubusercontent.com/Wonder-Tree/PoseCamera/master/tmp/output.png)
 
  
 
@@ -80,7 +80,7 @@ SSD Generated Anchors
 https://storage.googleapis.com/wt_storage/anchors.csv
 
 
-![](https://raw.githubusercontent.com/Wonder-Tree/PoseCamera/tmp/handtracker.png)
+![](https://raw.githubusercontent.com/Wonder-Tree/PoseCamera/master/tmp/handtracker.png)
 
 #### Using Docker
 
