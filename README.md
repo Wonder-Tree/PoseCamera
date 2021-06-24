@@ -36,6 +36,7 @@ cv2.waitKey(0)
 ```
 
 > Download Pretrained weights file from https://storage.googleapis.com/wt_storage/lightweight_pose_estimation.pth
+> <br>For training your own model then refer to this [document](https://wonder-tree.github.io/PoseCamera-Docs/#/pages/training)
 
 output of the above example
 
