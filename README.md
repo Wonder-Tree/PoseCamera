@@ -24,19 +24,18 @@ draw pose keypoints on image
 import posecamera
 import cv2
 
-posecamera.load("lightweight_pose_estimation.pth")
+det = posecamera.pose_tracker.PoseTracker()
 
 image = cv2.imread("example.jpg")
-poses = posecamera.estimate(image)
-for pose in poses:
-    pose.draw(image)
+
+pose = det(image)
+for name, (y, x, score) in pose.keypoints.items():
+    cv2.circle(image, (int(x), int(y)), 4, (255, 0, 0), -1)
+
 
 cv2.imshow("PoseCamera", image)
 cv2.waitKey(0)
 ```
-
-> Download Pretrained weights file from https://storage.googleapis.com/wt_storage/lightweight_pose_estimation.pth
-> <br>For training your own model then refer to this [document](https://wonder-tree.github.io/PoseCamera-Docs/#/pages/training)
 
 output of the above example
 
@@ -56,7 +55,7 @@ Handtracker
 ```
 import posecamera
 import cv2
-det = posecamera.hand_tracker.HandTracker("palm_detection_without_custom_op.tflite", "hand_landmark.tflite", "anchors.csv")
+det = posecamera.hand_tracker.HandTracker()
 
 image = cv2.imread("tmp/hands.jpg")
 keypoints, bbox = det(image)
@@ -68,18 +67,6 @@ for hand_keypoints in keypoints:
 cv2.imshow("PoseCamera - Hand Tracking", image)
 cv2.waitKey(0)
 ```
-
-> Download Pretrained weights files
-
-Palam Detections
-https://storage.googleapis.com/wt_storage/palm_detection_without_custom_op.tflite
-
-Hand Landmarks
-https://storage.googleapis.com/wt_storage/hand_landmark.tflite
-
-SSD Generated Anchors
-https://storage.googleapis.com/wt_storage/anchors.csv
-
 
 ![](https://raw.githubusercontent.com/Wonder-Tree/PoseCamera/master/tmp/handtracker.png)
 

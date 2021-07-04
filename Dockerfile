@@ -1,5 +1,4 @@
-#FROM nvidia/cuda:10.2-devel-ubuntu18.04
-FROM anibali/pytorch:1.5.0-cuda10.2
+FROM ubuntu:latest
 
 USER root
 
@@ -14,11 +13,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends python \
 COPY . /PoseCamera
 
 RUN pip install --upgrade pip
-
-# Install cython
-RUN pip install cython numpy scikit-build opencv-python
-
-RUN pip install pycocotools==2.0.0 --ignore-installed
 
 # Install Dependencies
 RUN cd /PoseCamera && pip install -r requirements.txt

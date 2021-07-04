@@ -8,7 +8,7 @@ REQUIREMENTS = (current_dir / "requirements.txt").read_text().splitlines()
 
 setup(
     name="posecamera",
-    version="2.0",
+    version="2.1",
     description="Realtime Human Pose Estimation",
     long_description=README,
     long_description_content_type="text/markdown",

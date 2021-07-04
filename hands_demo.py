@@ -1,6 +1,7 @@
 import posecamera
 import cv2
-det = posecamera.hand_tracker.HandTracker("palm_detection_without_custom_op.tflite", "hand_landmark.tflite", "anchors.csv")
+
+det = posecamera.hand_tracker.HandTracker()
 
 image = cv2.imread("tmp/hands.jpg")
 keypoints, bbox = det(image)

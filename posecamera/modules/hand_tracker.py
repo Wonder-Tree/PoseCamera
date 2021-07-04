@@ -4,12 +4,14 @@ import numpy as np
 import tensorflow as tf
 from shapely.geometry import Polygon
 from scipy.spatial.distance import pdist, squareform
+import wget
+import os
 
 class HandTracker():
     def __init__(self, 
-                 palm_model, 
-                 joint_model, 
-                 anchors_path,
+                 palm_model=None, 
+                 joint_model=None, 
+                 anchors_path=None,
                  box_enlarge = 1.5, 
                  box_shift = 0.4, 
                  max_hands = 2,
@@ -40,6 +42,22 @@ class HandTracker():
         self.iou_thres = iou_thres
 
         # Initialise models
+        if palm_model is None:
+            palm_model = "palm_detection_without_custom_op.tflite"
+            if not os.path.isfile(palm_model):
+                self.download_pretained_models("palm_model")
+
+        if joint_model is None:
+            joint_model = "hand_landmark.tflite"
+            if not os.path.isfile(joint_model):
+                self.download_pretained_models("joint_model")
+
+        if anchors_path is None:
+            anchors_path = "anchors.csv"
+            if not os.path.isfile(anchors_path):
+                self.download_pretained_models("anchors_path")
+            
+
         self.interp_palm = tf.lite.Interpreter(palm_model)
         self.interp_palm.allocate_tensors()
         self.interp_joint = tf.lite.Interpreter(joint_model)
@@ -87,6 +105,15 @@ class HandTracker():
 
         dir_v_r = dir_v @ self.R90.T
         return np.float32([kp2, kp2+dir_v*dist, kp2 + dir_v_r*dist])
+
+    @staticmethod
+    def download_pretained_models(model):
+        if model == "palm_model":
+            wget.download("https://storage.googleapis.com/wt_storage/palm_detection_without_custom_op.tflite")
+        if model == "joint_model":
+            wget.download("https://storage.googleapis.com/wt_storage/hand_landmark.tflite")
+        if model == "anchors_path":
+            wget.download("https://storage.googleapis.com/wt_storage/anchors.csv")
 
     @staticmethod
     def _triangle_to_bbox(source):
