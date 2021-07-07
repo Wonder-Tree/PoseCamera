@@ -25,16 +25,21 @@ class PoseTracker:
         self.input_size = 192
 
         if pose_model is None:
-            pose_model = "lite-model_movenet_singlepose_lightning_3.tflite"
+            pose_model = os.path.join(
+                os.path.dirname(__file__) + "/lite-model_movenet_singlepose_lightning_3.tflite"
+            )
             if not os.path.isfile(pose_model):
-                self.download_pretained_models()
+                self.download_pretained_models(pose_model)
         
         self.interpreter = tf.lite.Interpreter(model_path=pose_model)
         self.interpreter.allocate_tensors()
 
     @staticmethod
-    def download_pretained_models():
-        wget.download("https://storage.googleapis.com/wt_storage/lite-model_movenet_singlepose_lightning_3.tflite")
+    def download_pretained_models(pose_model):
+        wget.download(
+            "https://storage.googleapis.com/wt_storage/lite-model_movenet_singlepose_lightning_3.tflite",
+            pose_model
+        )
 
     def preprocess_img(self, img):
         rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -59,8 +64,6 @@ class PoseTracker:
 
         for keypoint in keypoints:
             keypoint[0] *= img.shape[0] 
-            keypoint[1] *= img.shape[1] 
-
-            keypoints[0], keypoints[1] = keypoints[1], keypoint[0]
+            keypoint[1] *= img.shape[1]
 
         return Pose(keypoints)

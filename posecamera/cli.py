@@ -25,13 +25,13 @@ def main():
     else:
         frame_provider = ImageReader(args.images)
     
-    pose = pose_tracker.PoseTracker()
+    det = pose_tracker.PoseTracker()
 
     for frame in frame_provider:
-        keypoints = pose(frame)
+        pose = det(frame)
 
         if not args.no_display:
-            for (y, x, score) in keypoints:
+            for (name, (y, x, score)) in pose.keypoints.items():
                 cv2.circle(frame, (int(x), int(y)), 3, (255, 0, 0), -1)
             
             cv2.imshow("PoseCamera", frame)
@@ -39,7 +39,7 @@ def main():
                 break
         else:
             print(
-                keypoints
+                pose.keypoints
             )
 
 

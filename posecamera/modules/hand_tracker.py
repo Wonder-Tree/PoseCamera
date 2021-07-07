@@ -43,19 +43,25 @@ class HandTracker():
 
         # Initialise models
         if palm_model is None:
-            palm_model = "palm_detection_without_custom_op.tflite"
+            palm_model = os.path.join(
+                os.path.dirname(__file__) + "/palm_detection_without_custom_op.tflite"
+            )
             if not os.path.isfile(palm_model):
-                self.download_pretained_models("palm_model")
+                self.download_pretained_models("palm_model", palm_model)
 
         if joint_model is None:
-            joint_model = "hand_landmark.tflite"
+            joint_model = os.path.join(
+                os.path.dirname(__file__) + "/hand_landmark.tflite"
+            )
             if not os.path.isfile(joint_model):
-                self.download_pretained_models("joint_model")
+                self.download_pretained_models("joint_model", joint_model)
 
         if anchors_path is None:
-            anchors_path = "anchors.csv"
+            anchors_path = os.path.join(
+                os.path.dirname(__file__) + "/anchors.csv"
+            )
             if not os.path.isfile(anchors_path):
-                self.download_pretained_models("anchors_path")
+                self.download_pretained_models("anchors_path", anchors_path)
             
 
         self.interp_palm = tf.lite.Interpreter(palm_model)
@@ -107,13 +113,13 @@ class HandTracker():
         return np.float32([kp2, kp2+dir_v*dist, kp2 + dir_v_r*dist])
 
     @staticmethod
-    def download_pretained_models(model):
+    def download_pretained_models(model, output):
         if model == "palm_model":
-            wget.download("https://storage.googleapis.com/wt_storage/palm_detection_without_custom_op.tflite")
+            wget.download("https://storage.googleapis.com/wt_storage/palm_detection_without_custom_op.tflite", output)
         if model == "joint_model":
-            wget.download("https://storage.googleapis.com/wt_storage/hand_landmark.tflite")
+            wget.download("https://storage.googleapis.com/wt_storage/hand_landmark.tflite", output)
         if model == "anchors_path":
-            wget.download("https://storage.googleapis.com/wt_storage/anchors.csv")
+            wget.download("https://storage.googleapis.com/wt_storage/anchors.csv", output)
 
     @staticmethod
     def _triangle_to_bbox(source):

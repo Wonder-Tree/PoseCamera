@@ -39,7 +39,7 @@ cv2.waitKey(0)
 
 output of the above example
 
-![](https://raw.githubusercontent.com/Wonder-Tree/PoseCamera/master/tmp/output.png)
+![](tmp/output.png)
 
  
 
@@ -68,7 +68,7 @@ cv2.imshow("PoseCamera - Hand Tracking", image)
 cv2.waitKey(0)
 ```
 
-![](https://raw.githubusercontent.com/Wonder-Tree/PoseCamera/master/tmp/handtracker.png)
+![](tmp/handtracker.png)
 
 #### Using Docker
 

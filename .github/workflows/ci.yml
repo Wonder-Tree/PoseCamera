@@ -24,7 +24,6 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install cython numpy
         pip install -r requirements.txt
     - name: Install system dependencies
       run: sudo apt install libgflags-dev libopencv-dev wget
@@ -32,4 +31,4 @@ jobs:
       run: |
         pip install setuptools wheel
         pip install .
-        posecamera --cpu --no-display --images ./tmp/female_pose.jpg
+        posecamera --no-display --images ./tmp/female_pose.jpg
