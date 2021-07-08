@@ -16,7 +16,7 @@ If you are having issues with the installation on Windows OS then check this [pa
 
 ### Usage
 
-> See Google colab notebook https://colab.research.google.com/drive/18uoYeKmliOFV8dTdOrXocClCA7nTwRcX?usp=sharing
+> See Google colab notebook https://colab.research.google.com/drive/1pzsgxaz1ZVesh_j-96PBak_OQKP19HHA?usp=sharing
 
 draw pose keypoints on image
 
