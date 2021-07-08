@@ -103,6 +103,8 @@ The base of this repository is based on the following research paper.
 }
 ```
 
+The base of hand tracking is based on the following repository : https://google.github.io/mediapipe/solutions/hands 
+
 #### Share your thoughts
 
 Join our [Discussion Channel](https://github.com/Wonder-Tree/PoseCamera/discussions)! We love to hear your ideas, suggestions or pull request
