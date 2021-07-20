@@ -2,7 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/posecamera.svg)](https://badge.fury.io/py/posecamera) [![PoseCamera Actions Status](https://github.com/Wonder-Tree/PoseCamera/workflows/build/badge.svg)](https://github.com/Wonder-Tree/PoseCamera/actions)  [![CodeFactor](https://www.codefactor.io/repository/github/wonder-tree/posecamera/badge)](https://www.codefactor.io/repository/github/wonder-tree/posecamera) [![](https://img.shields.io/badge/-Discussions-<COLOR>.svg)](https://github.com/Wonder-Tree/PoseCamera/discussions)
 
-PoseCamera is python based SDK for multi human pose estimation through RGB webcam.
+PoseCamera is python based SDK for human pose estimation through RGB webcam.
 
 ### Install
 
